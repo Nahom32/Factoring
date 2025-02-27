@@ -1,4 +1,10 @@
 import random
+'''
+    Done By: Nahom Senay
+    Id: GSR/4848/17
+    Course: Advanced Problem Solving
+    Title: Analysis on Different Factoring Algorithms
+'''
 
 def euclid_gcd(num1, num2):
     while num2:
@@ -27,12 +33,16 @@ def pollards_rho(n):
             return pollards_rho(n)
     return d
 
-def brute_factorize(n):
+def brute_factorize(lower_bound, n):
     '''
         This function uses brute force mechanism to find a factor between the lower bound
         and the number: n given as an argument.
+        arguments:
+            lower_bound:int
+            n:int
+
     '''
-    lower_bound = 11
+    
     for i in range(lower_bound,n//2):
         if n%i == 0:
             return i
