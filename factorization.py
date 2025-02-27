@@ -163,12 +163,43 @@ def composite_generator(rng_value):
         composites.append(n)
     composites.sort()
     return composites
+def profile_fermat():
+    composites = composite_generator(10)
+    fermat_times = []
+    brute_times = []
+    n_values = []
 
+# Run both methods on each composite number and record their execution times.
+    for n in composites:
+        n_values.append(n)
+        
+        start = time.perf_counter()
+        fermat_factor(n)
+        fermat_times.append(time.perf_counter() - start)
+        
+        start = time.perf_counter()
+        brute_factorize(2,n)
+        brute_times.append(time.perf_counter() - start)
+        
+        print(f"n = {n}, Fermat: {fermat_times[-1]:.6f} s, Brute: {brute_times[-1]:.6f} s")
 
-profile_algorithms([10403,22499,100151,1031407,10070001])
+    # Plot the results.
+    plt.figure(figsize=(10, 6))
+    plt.plot(n_values, fermat_times, marker='o', linestyle='-', label="Fermat's Method")
+    plt.plot(n_values, brute_times, marker='s', linestyle='-', label="Brute Force")
+    plt.xlabel("Composite Number (n)")
+    plt.ylabel("Time (seconds)")
+    plt.title("Time Comparison: Brute Force vs. Fermat's Factoring Method")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
+#profile_algorithms([10403,22499,100151,1031407,10070001])
 
 # Example usage:
 n = 10403  # 101 * 103
-factor = pollards_rho(n)
-print(f"One factor of {n} is {factor}")
+#factor = pollards_rho(n)
+#print(f"One factor of {n} is {factor}")
+profile_fermat()
 print(brute_factorize(11,345739))
