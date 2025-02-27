@@ -27,7 +27,19 @@ def pollards_rho(n):
             return pollards_rho(n)
     return d
 
+def brute_factorize(n):
+    '''
+        This function uses brute force mechanism to find a factor between the lower bound
+        and the number: n given as an argument.
+    '''
+    lower_bound = 11
+    for i in range(lower_bound,n//2):
+        if n%i == 0:
+            return i
+    return -1
+
 # Example usage:
 n = 10403  # 101 * 103
 factor = pollards_rho(n)
 print(f"One factor of {n} is {factor}")
+print(brute_factorize(1345739))
