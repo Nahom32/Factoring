@@ -7,18 +7,49 @@ import random
 '''
 
 def euclid_gcd(num1, num2):
+    '''
+        Takes two numbers num1 and num2 to calculate the greatest common 
+        divisor.
+        Arguments:
+            num1: int
+            num2: int
+        Returns:
+            int
+    '''
     while num2:
         num1, num2 = num2, num1 % num2
     return num1
 
 def quad_modulo(x,c,n):
+    '''
+        A pure helper function that calculates the quadratic modulo result which takes in three
+        integers and squares the first number adds it to the second number and calculates the 
+        modulo to n ===> f(x) = ((x^2 + c)mod n)
+        arguments:
+            x: int
+            c: int
+            n: int
+        returns
+            int
+    '''
     return (x*x + c) % n
 
+
+
 def pollards_rho(n):
+    '''
+        This function implements the pollard's rho method of finding a factor for a number.
+        It depends on random number generated from 2, to the number provided and leveraging
+        quadratic modulo function and the greatest common divisor to find the factor of the number.
+        arguments:
+        n: int
+        return type:
+        int
+    '''
     # Return a non-trivial factor of n or n if none is found.
     if n % 2 == 0:
         return 2
-    #f(x) = (x^2 + c)mod(n)
+    
     x = random.randrange(2, n)
     y = x
     c = random.randrange(1, n)
